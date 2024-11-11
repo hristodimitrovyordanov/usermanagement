@@ -1,0 +1,25 @@
+package com.hristo.usermanagement.user;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Table(name = "users")
+@Entity
+@Data
+@NoArgsConstructor
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String firstName;
+    private String lastName;
+    private LocalDate dateOfBirth;
+    @Column(unique = true)
+    private String phoneNumber;
+    @Column(unique = true)
+    private String email;
+}
