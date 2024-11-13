@@ -62,4 +62,12 @@ public class UserService {
     public void delete(Integer id) {
         userRepository.deleteById(id);
     }
+
+    public UserResponseDTO updateUserById(Integer id, UserDTO userDTO) {
+        User updatedUser = userMapper.toUser(userDTO);
+        updatedUser.setId(id);
+        userRepository.save(updatedUser);
+
+        return userMapper.toUserResponseDTO(updatedUser);
+    }
 }

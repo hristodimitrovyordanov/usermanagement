@@ -44,6 +44,11 @@ public class UserController {
         return userService.findUsersByName(name);
     }
 
+    @PutMapping("/users/{user-id}")
+    public UserResponseDTO updateUserById(@PathVariable("user-id") Integer id, @RequestBody UserDTO userDTO) {
+        return userService.updateUserById(id, userDTO);
+    }
+
     @DeleteMapping("/users/{user-id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("user-id") Integer id) {
