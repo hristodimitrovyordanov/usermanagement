@@ -2,6 +2,7 @@ package com.hristo.usermanagement.user;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,8 +53,33 @@ public class UserService {
                 .orElse(null);
     }
 
-    public List<UserResponseDTO> findUsersByName(String name) {
-        return userRepository.findAllByFirstNameContaining(name)
+    public List<UserResponseDTO> findAllUsersByLastName(String lastName) {
+        return userRepository.findAllByLastName(lastName)
+                .stream()
+                .map(userMapper::toUserResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<UserResponseDTO> findAllUsersByFirstName(String firstName) {
+        return userRepository.findAllByFirstName(firstName)
+                .stream()
+                .map(userMapper::toUserResponseDTO)
+                .collect(Collectors.toList());
+
+    }
+
+    public UserResponseDTO findUserByPhoneNumber(String phoneNumber) {
+        User user = userRepository.findUserByPhoneNumber(phoneNumber);
+        return userMapper.toUserResponseDTO(user);
+    }
+
+    public UserResponseDTO findUsersByEmail(String email) {
+        User user = userRepository.findUserByEmail(email);
+        return userMapper.toUserResponseDTO(user);
+    }
+
+    public List<UserResponseDTO> findAllUsersByDatOfBirth(LocalDate dateOfBirth) {
+        return userRepository.findAllByDateOfBirth(dateOfBirth)
                 .stream()
                 .map(userMapper::toUserResponseDTO)
                 .collect(Collectors.toList());
