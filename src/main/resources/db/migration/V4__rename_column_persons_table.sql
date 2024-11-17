@@ -1,0 +1,1 @@
+ALTER TABLE persons RENAME COLUMN u_password TO "password";

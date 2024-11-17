@@ -1,6 +1,4 @@
-CREATE DATABASE data_user;
-
-\c data_user;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
