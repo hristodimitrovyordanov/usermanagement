@@ -6,9 +6,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -43,29 +40,4 @@ public class UserManagementSecurityConfig {
 
         return http.build();
     }
-
-    //    @Bean
-//    public InMemoryUserDetailsManager userDetailsManager() {
-//
-//        UserDetails ivan = User.builder()
-//                .username("ivan")
-//                .password("{noop}test1234")
-//                .roles("EMPLOYEE")
-//                .build();
-//
-//        UserDetails george = User.builder()
-//                .username("george")
-//                .password("{noop}test1234")
-//                .roles("EMPLOYEE", "MANAGER")
-//                .build();
-//
-//        UserDetails hristo = User.builder()
-//                .username("hristo")
-//                .password("{noop}test1234")
-//                .roles("EMPLOYEE", "MANAGER", "ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(ivan, george, hristo);
-//    }
-
 }
