@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Tag(name = "User API")
-@RequestMapping("/user-accounts")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @Operation(summary = "Get all users sorted by last name", description = "Return a list of 'userResponseDTO'" +
-            " from all users sorted by last name" )
+            " from all users sorted by last name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @Operation(summary = "Get all users sorted by date of birth", description = "Return a list of 'userResponseDTO'" +
-            " from all users sorted by date of birth" )
+            " from all users sorted by date of birth")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
