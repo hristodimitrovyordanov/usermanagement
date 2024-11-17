@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @Tag(name = "User API")
+@RequestMapping("/user-accounts")
 public class UserController {
 
     private final UserService userService;
@@ -29,7 +30,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Successfully created"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @PostMapping("/users")
+    @PostMapping
     public UserResponseDTO saveUser(@RequestBody UserDTO userDTO) {
         return this.userService.saveUser(userDTO);
     }
@@ -38,7 +39,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
-    @GetMapping("/users")
+    @GetMapping
     public List<UserResponseDTO> findAllUsers() {
         return userService.findAllUsers();
     }
@@ -48,7 +49,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
-    @GetMapping("/users/sort-by-last-name")
+    @GetMapping("/sort-by-last-name")
     public List<UserResponseDTO> findAllUsersSortedByLastName() {
         return userService.findAllUsersSortedByLastName();
     }
@@ -58,7 +59,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
-    @GetMapping("/users/sort-by-date-of-birth")
+    @GetMapping("/sort-by-date-of-birth")
     public List<UserResponseDTO> findAllUsersSortedByDateOfBirth() {
         return userService.findAllUsersSortedByDateOfBirth();
     }
@@ -68,7 +69,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
             @ApiResponse(responseCode = "404", description = "Not found - the user was not found")
     })
-    @GetMapping("/users/{user-id}")
+    @GetMapping("/{user-id}")
     public UserResponseDTO findUserById(@PathVariable("user-id") Integer id) {
         return userService.findUserById(id);
     }
@@ -78,7 +79,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
     })
-    @GetMapping("/users/search-by-last-name/{user-last-name}")
+    @GetMapping("/search-by-last-name/{user-last-name}")
     public List<UserResponseDTO> findAllUsersByLastName(@PathVariable("user-last-name") String lastName) {
         return userService.findAllUsersByLastName(lastName);
     }
@@ -88,7 +89,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
     })
-    @GetMapping("/users/search-by-first-name/{user-first-name}")
+    @GetMapping("/search-by-first-name/{user-first-name}")
     public List<UserResponseDTO> findAllUsersByFirstName(@PathVariable("user-first-name") String firstName) {
         return userService.findAllUsersByFirstName(firstName);
     }
@@ -98,7 +99,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
     })
-    @GetMapping("/users/search-by-phone-number/{user-phone-number}")
+    @GetMapping("/search-by-phone-number/{user-phone-number}")
     public UserResponseDTO findUserByPhoneNumber(@PathVariable("user-phone-number") String phoneNumber) {
         return userService.findUserByPhoneNumber(phoneNumber);
     }
@@ -108,7 +109,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
     })
-    @GetMapping("/users/search-by-email/{user-email}")
+    @GetMapping("/search-by-email/{user-email}")
     public UserResponseDTO findUserByEmail(@PathVariable("user-email") String email) {
         return userService.findUsersByEmail(email);
     }
@@ -118,7 +119,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
     })
-    @GetMapping("/users/search-by-date-of-birth/{user-date-of-birth}")
+    @GetMapping("/search-by-date-of-birth/{user-date-of-birth}")
     public List<UserResponseDTO> findAllUsersByDateOfBirth(@PathVariable("user-date-of-birth") LocalDate dateOfBirth) {
         return userService.findAllUsersByDatOfBirth(dateOfBirth);
     }
@@ -127,13 +128,13 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully updated")
     })
-    @PutMapping("/users/{user-id}")
+    @PutMapping("/{user-id}")
     public UserResponseDTO updateUserById(@PathVariable("user-id") Integer id, @RequestBody UserDTO userDTO) {
         return userService.updateUserById(id, userDTO);
     }
 
     @Operation(summary = "Delete user")
-    @DeleteMapping("/users/{user-id}")
+    @DeleteMapping("/{user-id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully deleted")
     })
