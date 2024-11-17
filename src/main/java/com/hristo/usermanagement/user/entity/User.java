@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Table(name = "users")
+@Table(name = "user_accounts")
 @Entity
 @Data
 @NoArgsConstructor
