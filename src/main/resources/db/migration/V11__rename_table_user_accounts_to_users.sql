@@ -1,0 +1,1 @@
+ALTER TABLE user_accounts RENAME TO users;

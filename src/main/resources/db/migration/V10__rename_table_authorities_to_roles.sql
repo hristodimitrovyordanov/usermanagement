@@ -1,0 +1,1 @@
+ALTER TABLE authorities RENAME TO roles;
