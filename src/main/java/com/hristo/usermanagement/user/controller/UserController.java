@@ -1,5 +1,8 @@
-package com.hristo.usermanagement.user;
+package com.hristo.usermanagement.user.controller;
 
+import com.hristo.usermanagement.user.dto.UserDTO;
+import com.hristo.usermanagement.user.dto.UserResponseDTO;
+import com.hristo.usermanagement.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -45,7 +48,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
-    @GetMapping("/users/sort-by-lastname")
+    @GetMapping("/users/sort-by-last-name")
     public List<UserResponseDTO> findAllUsersSortedByLastName() {
         return userService.findAllUsersSortedByLastName();
     }

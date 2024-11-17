@@ -1,4 +1,4 @@
-package com.hristo.usermanagement.user;
+package com.hristo.usermanagement.user.dto;
 
 import java.time.LocalDate;
 

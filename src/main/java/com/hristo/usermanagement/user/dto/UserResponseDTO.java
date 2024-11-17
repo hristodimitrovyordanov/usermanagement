@@ -1,4 +1,4 @@
-package com.hristo.usermanagement.user;
+package com.hristo.usermanagement.user.dto;
 
 public record UserResponseDTO(
         String firstName,

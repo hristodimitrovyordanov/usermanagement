@@ -1,5 +1,10 @@
-package com.hristo.usermanagement.user;
+package com.hristo.usermanagement.user.service;
 
+import com.hristo.usermanagement.user.dto.UserDTO;
+import com.hristo.usermanagement.user.dto.UserResponseDTO;
+import com.hristo.usermanagement.user.entity.User;
+import com.hristo.usermanagement.user.mapper.UserMapper;
+import com.hristo.usermanagement.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

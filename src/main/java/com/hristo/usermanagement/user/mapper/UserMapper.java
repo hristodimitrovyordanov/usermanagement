@@ -1,5 +1,8 @@
-package com.hristo.usermanagement.user;
+package com.hristo.usermanagement.user.mapper;
 
+import com.hristo.usermanagement.user.entity.User;
+import com.hristo.usermanagement.user.dto.UserDTO;
+import com.hristo.usermanagement.user.dto.UserResponseDTO;
 import org.springframework.stereotype.Service;
 
 @Service
