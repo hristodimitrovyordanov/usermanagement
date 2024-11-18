@@ -3,6 +3,7 @@ package com.hristo.usermanagement.user.service;
 import com.hristo.usermanagement.user.dto.UserDTO;
 import com.hristo.usermanagement.user.dto.UserResponseDTO;
 import com.hristo.usermanagement.user.entity.User;
+import com.hristo.usermanagement.user.exception.UserNotFoundException;
 import com.hristo.usermanagement.user.mapper.UserMapper;
 import com.hristo.usermanagement.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,16 @@ public class UserService {
     }
 
     public UserResponseDTO findUserById(Integer id) {
+        Integer maxId = userRepository.findMaxId();
+
+        if (maxId == null) {
+            throw new UserNotFoundException("The user is not found in the database.");
+        }
+
+        if (id > maxId || id < 1) {
+            throw new UserNotFoundException("User id not found: " + id);
+        }
+
         return userRepository.findById(id)
                 .map(userMapper::toUserResponseDto)
                 .orElse(null);

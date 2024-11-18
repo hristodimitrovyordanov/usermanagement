@@ -72,6 +72,8 @@ public class UserRestController {
     })
     @GetMapping("/{user-id}")
     public UserResponseDTO findUserById(@PathVariable("user-id") Integer id) {
+
+
         return userService.findUserById(id);
     }
 
