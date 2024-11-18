@@ -34,7 +34,7 @@ public class UserManagementSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "user-management/users").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.PUT, "user-management/users/**").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.DELETE, "user-management/users/**").hasRole("ADMIN")
-                        .requestMatchers("/swagger-ui/index.html", "/swagger-ui/index.html/**", "/api-docs")
+                        .requestMatchers("swagger-ui/index.html/", "/swagger-ui/index.html/**", "/api-docs")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
