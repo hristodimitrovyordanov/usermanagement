@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +16,12 @@ import java.util.List;
 
 @RestController
 @Tag(name = "User API")
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/user-management/users")
+public class UserRestController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserRestController(UserService userService) {
         this.userService = userService;
     }
 
@@ -31,11 +32,11 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    public UserResponseDTO saveUser(@RequestBody UserDTO userDTO) {
+    public UserResponseDTO saveUser(@Valid @RequestBody UserDTO userDTO) {
         return this.userService.saveUser(userDTO);
     }
 
-    @Operation(summary = "Get all users", description = "Return a list of 'userResponseDTO' from all users")
+    @Operation(summary = "Get all users with all data", description = "Return a list of 'UserResponseDTO' from all users")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
@@ -44,7 +45,7 @@ public class UserController {
         return userService.findAllUsers();
     }
 
-    @Operation(summary = "Get all users sorted by last name", description = "Return a list of 'userResponseDTO'" +
+    @Operation(summary = "Get all users sorted by last name", description = "Return a list of 'UserResponseDTO'" +
             " from all users sorted by last name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
@@ -54,7 +55,7 @@ public class UserController {
         return userService.findAllUsersSortedByLastName();
     }
 
-    @Operation(summary = "Get all users sorted by date of birth", description = "Return a list of 'userResponseDTO'" +
+    @Operation(summary = "Get all users sorted by date of birth", description = "Return a list of 'UserResponseDTO'" +
             " from all users sorted by date of birth")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
@@ -74,7 +75,7 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-    @Operation(summary = "Get all users by searched last name", description = "Return a list of 'userResponseDTO'" +
+    @Operation(summary = "Get all users by searched last name", description = "Return a list of 'UserResponseDTO'" +
             " from all users which contains searched last name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
@@ -84,7 +85,7 @@ public class UserController {
         return userService.findAllUsersByLastName(lastName);
     }
 
-    @Operation(summary = "Get all users by searched first name", description = "Return a list of 'userResponseDTO'" +
+    @Operation(summary = "Get all users by searched first name", description = "Return a list of 'UserResponseDTO'" +
             " from all users which contains searched first name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
@@ -94,7 +95,7 @@ public class UserController {
         return userService.findAllUsersByFirstName(firstName);
     }
 
-    @Operation(summary = "Get user by phone number", description = "Return a 'userResponseDTO'" +
+    @Operation(summary = "Get user by phone number", description = "Return a 'UserResponseDTO'" +
             " from a searched user which contains the phone number")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
@@ -104,7 +105,7 @@ public class UserController {
         return userService.findUserByPhoneNumber(phoneNumber);
     }
 
-    @Operation(summary = "Get user by email", description = "Return a 'userResponseDTO'" +
+    @Operation(summary = "Get user by email", description = "Return a 'UserResponseDTO'" +
             " from a searched user which contains the email")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
@@ -114,7 +115,7 @@ public class UserController {
         return userService.findUsersByEmail(email);
     }
 
-    @Operation(summary = "Get all users by searched date of birth", description = "Return a list of 'userResponseDTO'" +
+    @Operation(summary = "Get all users by searched date of birth", description = "Return a list of 'UserResponseDTO'" +
             " from all users which contains searched date of birth")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved")
@@ -124,12 +125,12 @@ public class UserController {
         return userService.findAllUsersByDatOfBirth(dateOfBirth);
     }
 
-    @Operation(summary = "Update user", description = "Return a 'userResponseDTO' of updated user")
+    @Operation(summary = "Update user", description = "Return a 'UserResponseDTO' of updated user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully updated")
     })
     @PutMapping("/{user-id}")
-    public UserResponseDTO updateUserById(@PathVariable("user-id") Integer id, @RequestBody UserDTO userDTO) {
+    public UserResponseDTO updateUserById(@Valid @PathVariable("user-id") Integer id, @RequestBody UserDTO userDTO) {
         return userService.updateUserById(id, userDTO);
     }
 

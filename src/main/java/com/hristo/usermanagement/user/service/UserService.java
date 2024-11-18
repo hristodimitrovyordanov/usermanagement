@@ -26,13 +26,13 @@ public class UserService {
         User user = userMapper.toUser(userDTO);
         User savedUser = userRepository.save(user);
 
-        return userMapper.toUserResponseDTO(savedUser);
+        return userMapper.toUserResponseDto(savedUser);
     }
 
     public List<UserResponseDTO> findAllUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(userMapper::toUserResponseDTO)
+                .map(userMapper::toUserResponseDto)
                 .collect(Collectors.toList());
     }
 
@@ -40,7 +40,7 @@ public class UserService {
         return userRepository.findAll()
                 .stream()
                 .sorted((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()))
-                .map(userMapper::toUserResponseDTO)
+                .map(userMapper::toUserResponseDto)
                 .collect(Collectors.toList());
     }
 
@@ -48,45 +48,45 @@ public class UserService {
         return userRepository.findAll()
                 .stream()
                 .sorted((o1, o2) -> o1.getDateOfBirth().compareTo(o2.getDateOfBirth()))
-                .map(userMapper::toUserResponseDTO)
+                .map(userMapper::toUserResponseDto)
                 .collect(Collectors.toList());
     }
 
     public UserResponseDTO findUserById(Integer id) {
         return userRepository.findById(id)
-                .map(userMapper::toUserResponseDTO)
+                .map(userMapper::toUserResponseDto)
                 .orElse(null);
     }
 
     public List<UserResponseDTO> findAllUsersByLastName(String lastName) {
         return userRepository.findAllByLastName(lastName)
                 .stream()
-                .map(userMapper::toUserResponseDTO)
+                .map(userMapper::toUserResponseDto)
                 .collect(Collectors.toList());
     }
 
     public List<UserResponseDTO> findAllUsersByFirstName(String firstName) {
         return userRepository.findAllByFirstName(firstName)
                 .stream()
-                .map(userMapper::toUserResponseDTO)
+                .map(userMapper::toUserResponseDto)
                 .collect(Collectors.toList());
 
     }
 
     public UserResponseDTO findUserByPhoneNumber(String phoneNumber) {
         User user = userRepository.findUserByPhoneNumber(phoneNumber);
-        return userMapper.toUserResponseDTO(user);
+        return userMapper.toUserResponseDto(user);
     }
 
     public UserResponseDTO findUsersByEmail(String email) {
         User user = userRepository.findUserByEmail(email);
-        return userMapper.toUserResponseDTO(user);
+        return userMapper.toUserResponseDto(user);
     }
 
     public List<UserResponseDTO> findAllUsersByDatOfBirth(LocalDate dateOfBirth) {
         return userRepository.findAllByDateOfBirth(dateOfBirth)
                 .stream()
-                .map(userMapper::toUserResponseDTO)
+                .map(userMapper::toUserResponseDto)
                 .collect(Collectors.toList());
     }
 
@@ -99,6 +99,6 @@ public class UserService {
         updatedUser.setId(id);
         userRepository.save(updatedUser);
 
-        return userMapper.toUserResponseDTO(updatedUser);
+        return userMapper.toUserResponseDto(updatedUser);
     }
 }

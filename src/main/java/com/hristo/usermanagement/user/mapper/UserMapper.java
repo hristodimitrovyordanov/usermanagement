@@ -24,10 +24,13 @@ public class UserMapper {
         return user;
     }
 
-    public UserResponseDTO toUserResponseDTO(User user) {
+    public UserResponseDTO toUserResponseDto(User user) {
         return new UserResponseDTO(
+                user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getDateOfBirth(),
+                user.getPhoneNumber(),
                 user.getEmail());
     }
 }

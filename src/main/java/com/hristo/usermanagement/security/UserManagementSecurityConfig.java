@@ -29,11 +29,11 @@ public class UserManagementSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        .requestMatchers(HttpMethod.GET, "/users").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.GET, "/users/**").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.POST, "/users").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.PUT, "/users/**").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "user-management/users").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET, "user-management/users/**").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.POST, "user-management/users").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "user-management/users/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, "user-management/users/**").hasRole("ADMIN")
                         .requestMatchers("/swagger-ui/index.html", "/swagger-ui/index.html/**", "/api-docs")
                         .permitAll()
                         .anyRequest()
