@@ -30,6 +30,7 @@ public class UserManagementSecurityConfig {
         http.authorizeHttpRequests(configurer ->
                 configurer
                         .requestMatchers(HttpMethod.GET, "user-management/users").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET, "user-management/home").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.GET, "user-management/users/**").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, "user-management/users").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.PUT, "user-management/users/**").hasRole("MANAGER")

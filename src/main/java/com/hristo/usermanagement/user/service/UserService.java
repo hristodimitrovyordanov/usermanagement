@@ -6,6 +6,10 @@ import com.hristo.usermanagement.user.entity.User;
 import com.hristo.usermanagement.user.exception.UserNotFoundException;
 import com.hristo.usermanagement.user.mapper.UserMapper;
 import com.hristo.usermanagement.user.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -111,5 +115,20 @@ public class UserService {
         userRepository.save(updatedUser);
 
         return userMapper.toUserResponseDto(updatedUser);
+    }
+
+    public Page<UserResponseDTO> getPaginatedUsers(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
+    }
+
+    public Page<UserResponseDTO> getPaginatedUsersSortedByLastName(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("lastName").ascending());
+        return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
+    }
+
+    public Page<UserResponseDTO> getPaginatedUsersSortedByDateOfBirth(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("dateOfBirth").ascending());
+        return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
     }
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management Application</title>
+    <style>
+        .error {color:red}
+    </style>
+</head>
+<body>
+<h1>Welcome to User Management System</h1>
+<hr>
+<h3>GET</h3>
+<a href="#" th:href="@{http://127.0.0.1:8080/user-management/users/list-all}">
+    <button type="button">Get all users</button>
+</a>
+<br><br>
+<a href="#" th:href="@{http://127.0.0.1:8080/user-management/users/list-all-sorted-by-last-name}">
+    <button type="button">Get all users sorted by last name</button>
+</a>
+<br><br>
+<a href="#" th:href="@{http://127.0.0.1:8080/user-management/users/list-all-sorted-by-date-of-birth}">
+    <button type="button">Get all users sorted by date of birth</button>
+</a>
+<br><br>
+<a href="#" th:href="@{http://127.0.0.1:8080/user-management/users/list-all}">
+    <button type="button">Get user by id</button>
+</a>
+<br><br>
+<hr>
+<h3>POST</h3>
+<a href="http://127.0.0.1:8080/user-management/users">Create user</a>
+<br><br>
+<hr>
+<h3>PUT</h3>
+<a href="http://127.0.0.1:8080/user-management/users">Update user</a>
+<br><br>
+<hr>
+<h3>DELETE</h3>
+<a href="http://127.0.0.1:8080/user-management/users">Delete user</a>
+</body>
+</html>
