@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -59,11 +58,42 @@ public class UserController {
         return "users-sorted-by-date-of-birth";
     }
 
-    @GetMapping("/users/{id}")
-    public String getUserById(@PathVariable Integer id, Model model) {
+    @GetMapping("/users/user-by-id")
+    public String findUserById(@RequestParam("id") Integer id, Model model) {
         UserResponseDTO userResponseDTO = userService.findUserById(id);
         model.addAttribute("userResponseDTO", userResponseDTO);
 
-        return "user-by-id";
+        return "user-details";
+    }
+
+    @GetMapping("/users/user-form-by-id")
+    public String showGetUserFormByID() {
+        return "user-form-by-id";
+    }
+
+    @GetMapping("/users/user-by-email")
+    public String findUserByEmail(@RequestParam("email") String email, Model model) {
+        UserResponseDTO userResponseDTO = userService.findUserByEmail(email);
+        model.addAttribute("userResponseDTO", userResponseDTO);
+
+        return "user-details";
+    }
+
+    @GetMapping("/users/user-form-by-email")
+    public String showGetUserFormByEmail() {
+        return "user-form-by-email";
+    }
+
+    @GetMapping("/users/user-by-phone-number")
+    public String findUserByPhoneNumber(@RequestParam("phoneNumber") String phoneNumber, Model model) {
+        UserResponseDTO userResponseDTO = userService.findUserByPhoneNumber(phoneNumber);
+        model.addAttribute("userResponseDTO", userResponseDTO);
+
+        return "user-details";
+    }
+
+    @GetMapping("/users/user-form-by-phone-number")
+    public String showGetUserFormByPhoneNumber() {
+        return "user-form-by-phone-number";
     }
 }

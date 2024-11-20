@@ -114,7 +114,7 @@ public class UserRestController {
     })
     @GetMapping("/search-by-email/{user-email}")
     public UserResponseDTO findUserByEmail(@PathVariable("user-email") String email) {
-        return userService.findUsersByEmail(email);
+        return userService.findUserByEmail(email);
     }
 
     @Operation(summary = "Get all users by searched date of birth", description = "Return a list of 'UserResponseDTO'" +

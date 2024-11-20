@@ -93,7 +93,7 @@ public class UserService {
         return userMapper.toUserResponseDto(user);
     }
 
-    public UserResponseDTO findUsersByEmail(String email) {
+    public UserResponseDTO findUserByEmail(String email) {
         User user = userRepository.findUserByEmail(email);
         return userMapper.toUserResponseDto(user);
     }

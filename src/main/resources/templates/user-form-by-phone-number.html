@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.ort">
+<head>
+    <meta charset="UTF-8">
+    <title>User By Phone Number</title>
+</head>
+<body>
+<h2>Find user by Phone Number</h2>
+<form th:action="@{/user-management/users/user-by-phone-number}" method="get">
+    <input type="text" name="phoneNumber" placeholder="Enter User Phone Number"/>
+    <button type="submit">Find User</button>
+</form>
+
+<br><br>
+<a href="http://127.0.0.1:8080/user-management/index">User management</a>
+</body>
+</html>

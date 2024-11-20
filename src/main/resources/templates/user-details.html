@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Data</title>
+</head>
+<body>
+<h2>User details</h2>
+<p><strong>Id:</strong><span th:text="${userResponseDTO.id}"></span></p>
+<p><strong>First name:</strong><span th:text="${userResponseDTO.firstName}"></span></p>
+<p><strong>Last name:</strong><span th:text="${userResponseDTO.lastName}"></span></p>
+<p><strong>Date of birth:</strong><span th:text="${userResponseDTO.dateOfBirth}"></span></p>
+<p><strong>Phone number:</strong><span th:text="${userResponseDTO.phoneNumber}"></span></p>
+<p><strong>Email:</strong><span th:text="${userResponseDTO.email}"></span></p>
+
+<br><br>
+<a href="http://127.0.0.1:8080/user-management/index">User management</a>
+</body>
+</html>
