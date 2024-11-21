@@ -27,12 +27,12 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public UserResponseDTO saveUser(UserDTO userDTO) {
-        User user = userMapper.toUser(userDTO);
-        User savedUser = userRepository.save(user);
-
-        return userMapper.toUserResponseDto(savedUser);
-    }
+//    public UserResponseDTO createUser(UserDTO userDTO) {
+//        User user = userMapper.toUser(userDTO);
+//        User savedUser = userRepository.save(user);
+//
+//        return userMapper.toUserResponseDto(savedUser);
+//    }
 
     public List<UserResponseDTO> findAllUsers() {
         return userRepository.findAll()

@@ -32,8 +32,8 @@ public class UserRestController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    public UserResponseDTO saveUser(@Valid @RequestBody UserDTO userDTO) {
-        return this.userService.saveUser(userDTO);
+    public UserResponseDTO createUser(@Valid @RequestBody UserDTO userDTO) {
+        return this.userService.createUser(userDTO);
     }
 
     @Operation(summary = "Get all users with all data", description = "Return a list of 'UserResponseDTO' from all users")
