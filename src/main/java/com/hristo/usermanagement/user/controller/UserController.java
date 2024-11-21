@@ -179,4 +179,16 @@ public class UserController {
     public String showPostCreateUser() {
         return "create-user-form";
     }
+
+    @DeleteMapping("/users/delete")
+    public String deleteUser(@RequestParam Integer id, Model model) {
+        userService.delete(id);
+        model.addAttribute("message", "User with ID " + id + " deleted successfully.");
+        return "delete-confirmation";
+    }
+
+    @GetMapping("users/delete-user")
+    public String showDeleteUser() {
+        return "user-delete-form";
+    }
 }

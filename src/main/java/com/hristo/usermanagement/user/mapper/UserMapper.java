@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserMapper {
+    private static final String THE_USER_DTO_SHOULD_NOT_BE_NULL = "The user DTO should not be null.";
 
     public User toUser(UserDTO userDTO) {
 
         if (userDTO == null) {
-            throw new NullPointerException("The user DTO should not be null.");
+            throw new NullPointerException(THE_USER_DTO_SHOULD_NOT_BE_NULL);
         }
 
         User user = new User();

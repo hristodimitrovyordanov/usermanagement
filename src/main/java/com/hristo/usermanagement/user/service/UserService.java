@@ -18,6 +18,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
+    private static final String ID_NOT_FOUND = "ID not found ";
+    private static final String LAST_NAME = "lastName";
+    private static final String DATE_OF_BIRTH = "dateOfBirth";
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -27,14 +30,8 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-//    public UserResponseDTO createUser(UserDTO userDTO) {
-//        User user = userMapper.toUser(userDTO);
-//        User savedUser = userRepository.save(user);
-//
-//        return userMapper.toUserResponseDto(savedUser);
-//    }
-
     public List<UserResponseDTO> findAllUsers() {
+
         return userRepository.findAll()
                 .stream()
                 .map(userMapper::toUserResponseDto)
@@ -42,6 +39,7 @@ public class UserService {
     }
 
     public List<UserResponseDTO> findAllUsersSortedByLastName() {
+
         return userRepository.findAll()
                 .stream()
                 .sorted((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()))
@@ -50,6 +48,7 @@ public class UserService {
     }
 
     public List<UserResponseDTO> findAllUsersSortedByDateOfBirth() {
+
         return userRepository.findAll()
                 .stream()
                 .sorted((o1, o2) -> o1.getDateOfBirth().compareTo(o2.getDateOfBirth()))
@@ -58,14 +57,9 @@ public class UserService {
     }
 
     public UserResponseDTO findUserById(Integer id) {
-        Integer maxId = userRepository.findMaxId();
 
-        if (maxId == null) {
-            throw new UserNotFoundException("The user is not found in the database.");
-        }
-
-        if (id > maxId || id < 1) {
-            throw new UserNotFoundException("User id not found: " + id);
+        if (doesIDNotExist(id)) {
+            throw new UserNotFoundException(ID_NOT_FOUND + id);
         }
 
         return userRepository.findById(id)
@@ -74,6 +68,7 @@ public class UserService {
     }
 
     public List<UserResponseDTO> findAllUsersByLastName(String lastName) {
+
         return userRepository.findAllByLastName(lastName)
                 .stream()
                 .map(userMapper::toUserResponseDto)
@@ -81,6 +76,7 @@ public class UserService {
     }
 
     public List<UserResponseDTO> findAllUsersByFirstName(String firstName) {
+
         return userRepository.findAllByFirstName(firstName)
                 .stream()
                 .map(userMapper::toUserResponseDto)
@@ -90,15 +86,18 @@ public class UserService {
 
     public UserResponseDTO findUserByPhoneNumber(String phoneNumber) {
         User user = userRepository.findUserByPhoneNumber(phoneNumber);
+
         return userMapper.toUserResponseDto(user);
     }
 
     public UserResponseDTO findUserByEmail(String email) {
         User user = userRepository.findUserByEmail(email);
+
         return userMapper.toUserResponseDto(user);
     }
 
     public List<UserResponseDTO> findAllUsersByDatOfBirth(LocalDate dateOfBirth) {
+
         return userRepository.findAllByDateOfBirth(dateOfBirth)
                 .stream()
                 .map(userMapper::toUserResponseDto)
@@ -106,10 +105,20 @@ public class UserService {
     }
 
     public void delete(Integer id) {
+
+        if (doesIDNotExist(id)) {
+            throw new UserNotFoundException(ID_NOT_FOUND);
+        }
+
         userRepository.deleteById(id);
     }
 
     public UserResponseDTO updateUserById(Integer id, UserDTO userDTO) {
+
+        if (doesIDNotExist(id)) {
+            throw new UserNotFoundException(ID_NOT_FOUND);
+        }
+
         User updatedUser = userMapper.toUser(userDTO);
         updatedUser.setId(id);
         userRepository.save(updatedUser);
@@ -124,13 +133,13 @@ public class UserService {
     }
 
     public Page<UserResponseDTO> getPaginatedUsersSortedByLastName(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("lastName").ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by(LAST_NAME).ascending());
 
         return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
     }
 
     public Page<UserResponseDTO> getPaginatedUsersSortedByDateOfBirth(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("dateOfBirth").ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by(DATE_OF_BIRTH).ascending());
 
         return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
     }
@@ -159,6 +168,11 @@ public class UserService {
     public UserResponseDTO createUser(UserDTO userDTO) {
         User user = userMapper.toUser(userDTO);
         User savedUser = userRepository.save(user);
+
         return userMapper.toUserResponseDto(savedUser);
+    }
+
+    private boolean doesIDNotExist(Integer id) {
+        return !userRepository.existsById(id);
     }
 }
