@@ -1,15 +1,16 @@
 package com.hristo.usermanagement.user.controller;
 
+import com.hristo.usermanagement.user.dto.UserDTO;
 import com.hristo.usermanagement.user.dto.UserResponseDTO;
 import com.hristo.usermanagement.user.entity.User;
 import com.hristo.usermanagement.user.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -156,5 +157,26 @@ public class UserController {
     @GetMapping("/users/user-form-by-date-of-birth")
     public String showGetUserFormByDateOfBirth() {
         return "user-form-by-date-of-birth";
+    }
+
+    @PostMapping("users/create")
+    public String createUser(
+            @Valid @ModelAttribute("userDTO") UserDTO userDTO,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "create-user-form";
+        }
+
+        UserResponseDTO savedUser = userService.createUser(userDTO);
+        model.addAttribute("userResponseDTO", savedUser);
+
+        return "user-details";
+    }
+
+    @GetMapping("/users/create-user")
+    public String showPostCreateUser() {
+        return "create-user-form";
     }
 }

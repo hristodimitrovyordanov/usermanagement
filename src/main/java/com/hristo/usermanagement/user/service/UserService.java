@@ -155,4 +155,10 @@ public class UserService {
 
         return usersPage.map(userMapper::toUserResponseDto);
     }
+
+    public UserResponseDTO createUser(UserDTO userDTO) {
+        User user = userMapper.toUser(userDTO);
+        User savedUser = userRepository.save(user);
+        return userMapper.toUserResponseDto(savedUser);
+    }
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.ort">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+</head>
+<body>
+<h2>Create User</h2>
+<form th:action="@{/user-management/users/create}" th:object="${userDTO}" method="post">
+    <input type="text" name="firstName" placeholder="Enter User First Name"/>
+    <br><br>
+    <input type="text" name="lastName" placeholder="Enter User Last Name"/>
+    <br><br>
+    <input type="date" name="dateOfBirth" placeholder="Enter User Date Of Birth"/>
+    <br><br>
+    <input type="text" name="phoneNumber" placeholder="Enter User Phone Number"/>
+    <br><br>
+    <input type="email" name="email" placeholder="Enter User Email"/>
+    <br><br><br>
+    <button type="submit">Create User</button>
+</form>
+<br><br>
+<a href="http://127.0.0.1:8080/user-management/index">User management</a>
+</body>
+</html>
