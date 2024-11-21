@@ -31,16 +31,19 @@
     </tbody>
 </table>
 <div>
-    <a th:href="@{/user-management/users/list-all-sorted-by-date-of-birth(page=${usersPageSortedByDateOfBirth.number - 1}, size=${usersPageSortedByDateOfBirth.size})}"
+    <a th:href="@{/user-management/users/list-all-sorted-by-date-of-birth(page=${usersPageSortedByDateOfBirth.number - 1},
+        size=${usersPageSortedByDateOfBirth.size})}"
        th:if="${usersPageSortedByDateOfBirth.hasPrevious()}">Previous</a>
 
     <span th:each="i : ${#numbers.sequence(0, usersPageSortedByDateOfBirth.totalPages - 1)}">
-            <a th:href="@{/user-management/users/list-all-sorted-by-date-of-birth(page=${i}, size=${usersPageSortedByDateOfBirth.size})}"
+            <a th:href="@{/user-management/users/list-all-sorted-by-date-of-birth(page=${i},
+                size=${usersPageSortedByDateOfBirth.size})}"
                th:classappend="${i == usersPageSortedByDateOfBirth.number ? 'active' : ''}"
                th:text="${i + 1}"></a>
         </span>
 
-    <a th:href="@{/user-management/users/list-all-sorted-by-date-of-birth(page=${usersPageSortedByDateOfBirth.number + 1}, size=${usersPageSortedByDateOfBirth.size})}"
+    <a th:href="@{/user-management/users/list-all-sorted-by-date-of-birth(page=${usersPageSortedByDateOfBirth.number + 1},
+        size=${usersPageSortedByDateOfBirth.size})}"
        th:if="${usersPageSortedByDateOfBirth.hasNext()}">Next</a>
 </div>
 <br><br>

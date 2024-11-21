@@ -119,16 +119,40 @@ public class UserService {
 
     public Page<UserResponseDTO> getPaginatedUsers(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
+
         return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
     }
 
     public Page<UserResponseDTO> getPaginatedUsersSortedByLastName(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("lastName").ascending());
+
         return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
     }
 
     public Page<UserResponseDTO> getPaginatedUsersSortedByDateOfBirth(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("dateOfBirth").ascending());
+
         return userRepository.findAll(pageable).map(userMapper::toUserResponseDto);
+    }
+
+    public Page<UserResponseDTO> getPaginatedUsersBySpecificFirstName(int page, int size, String firstName) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> usersPage = userRepository.findAllByFirstName(firstName, pageable);
+
+        return usersPage.map(userMapper::toUserResponseDto);
+    }
+
+    public Page<UserResponseDTO> getPaginatedUsersBySpecificLastName(int page, int size, String lastName) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> usersPage = userRepository.findAllByLastName(lastName, pageable);
+
+        return usersPage.map(userMapper::toUserResponseDto);
+    }
+
+    public Page<UserResponseDTO> getPaginatedUsersByDateOfBirth(int page, int size, LocalDate dateOfBirth) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> usersPage = userRepository.findAllByDateOfBirth(dateOfBirth, pageable);
+
+        return usersPage.map(userMapper::toUserResponseDto);
     }
 }

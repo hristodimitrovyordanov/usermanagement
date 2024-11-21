@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/user-management")
 public class UserController {
@@ -52,7 +55,8 @@ public class UserController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             Model model) {
-        Page<UserResponseDTO> usersPageSortedByDateOfBirth = userService.getPaginatedUsersSortedByDateOfBirth(page, size);
+        Page<UserResponseDTO> usersPageSortedByDateOfBirth = userService
+                .getPaginatedUsersSortedByDateOfBirth(page, size);
         model.addAttribute("usersPageSortedByDateOfBirth", usersPageSortedByDateOfBirth);
 
         return "users-sorted-by-date-of-birth";
@@ -95,5 +99,62 @@ public class UserController {
     @GetMapping("/users/user-form-by-phone-number")
     public String showGetUserFormByPhoneNumber() {
         return "user-form-by-phone-number";
+    }
+
+    @GetMapping("/users/user-by-specific-first-name")
+    public String listUsersBySearchedFirstName(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam("firstName") String firstName,
+            Model model) {
+        Page<UserResponseDTO> usersPageBySpecificFirstName = userService
+                .getPaginatedUsersBySpecificFirstName(page, size, firstName);
+        model.addAttribute("usersPageBySpecificFirstName", usersPageBySpecificFirstName);
+        model.addAttribute("param", Map.of("firstName", firstName));
+
+        return "users-by-specific-first-name";
+    }
+
+    @GetMapping("/users/user-form-by-specific-first-name")
+    public String showGetUserFormBySearchedFirstName() {
+        return "user-form-by-specific-first-name";
+    }
+
+    @GetMapping("/users/user-by-specific-last-name")
+    public String listUsersBySearchedLastName(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam("lastName") String lastName,
+            Model model) {
+        Page<UserResponseDTO> usersPageBySpecificLastName = userService
+                .getPaginatedUsersBySpecificLastName(page, size, lastName);
+        model.addAttribute("usersPageBySpecificLastName", usersPageBySpecificLastName);
+        model.addAttribute("param", Map.of("lastName", lastName));
+
+        return "users-by-specific-last-name";
+    }
+
+    @GetMapping("/users/user-form-by-specific-last-name")
+    public String showGetUserFormBySearchedLastName() {
+        return "user-form-by-specific-last-name";
+    }
+
+    @GetMapping("/users/user-by-date-of-birth")
+    public String listUsersBySearchedDateOfBirth(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam("dateOfBirth") LocalDate dateOfBirth,
+            Model model) {
+        Page<UserResponseDTO> usersPageByDateOfBirth = userService
+                .getPaginatedUsersByDateOfBirth(page, size, dateOfBirth);
+        model.addAttribute("usersPageByDateOfBirth", usersPageByDateOfBirth);
+        model.addAttribute("param", Map.of("dateOfBirth", dateOfBirth));
+
+        return "users-by-date-of-birth";
+    }
+
+    @GetMapping("/users/user-form-by-date-of-birth")
+    public String showGetUserFormByDateOfBirth() {
+        return "user-form-by-date-of-birth";
     }
 }

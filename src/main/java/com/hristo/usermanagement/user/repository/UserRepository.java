@@ -1,6 +1,8 @@
 package com.hristo.usermanagement.user.repository;
 
 import com.hristo.usermanagement.user.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT MAX(u.id) FROM User u")
     Integer findMaxId();
+
+    Page<User> findAllByFirstName(String firstName, Pageable pageable);
+
+    Page<User> findAllByLastName(String lastName, Pageable pageable);
+
+    Page<User> findAllByDateOfBirth(LocalDate dateOfBirth, Pageable pageable);
 }

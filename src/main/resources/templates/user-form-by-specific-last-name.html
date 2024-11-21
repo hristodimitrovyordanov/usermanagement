@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.ort">
+<head>
+    <meta charset="UTF-8">
+    <title>Users By Last Name</title>
+</head>
+<body>
+<h2>Find all users by last name</h2>
+<form th:action="@{/user-management/users/user-by-specific-last-name}" method="get">
+    <input type="text" name="lastName" placeholder="Enter User Last Name"/>
+    <button type="submit">Find Users</button>
+</form>
+
+<br><br>
+<a href="http://127.0.0.1:8080/user-management/index">User management</a>
+</body>
+</html>
