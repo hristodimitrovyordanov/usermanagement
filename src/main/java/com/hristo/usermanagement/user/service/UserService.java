@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    private static final String ID_NOT_FOUND = "ID not found ";
+    private static final String USER_NOT_FOUND = "User not found with id: ";
     private static final String LAST_NAME = "lastName";
     private static final String DATE_OF_BIRTH = "dateOfBirth";
 
@@ -59,7 +59,7 @@ public class UserService {
     public UserResponseDTO findUserById(Integer id) {
 
         if (doesIDNotExist(id)) {
-            throw new UserNotFoundException(ID_NOT_FOUND + id);
+            throw new UserNotFoundException(USER_NOT_FOUND + id);
         }
 
         return userRepository.findById(id)
@@ -107,7 +107,7 @@ public class UserService {
     public void delete(Integer id) {
 
         if (doesIDNotExist(id)) {
-            throw new UserNotFoundException(ID_NOT_FOUND);
+            throw new UserNotFoundException(USER_NOT_FOUND + id);
         }
 
         userRepository.deleteById(id);
@@ -116,7 +116,7 @@ public class UserService {
     public UserResponseDTO updateUserById(Integer id, UserDTO userDTO) {
 
         if (doesIDNotExist(id)) {
-            throw new UserNotFoundException(ID_NOT_FOUND);
+            throw new UserNotFoundException(USER_NOT_FOUND + id);
         }
 
         User updatedUser = userMapper.toUser(userDTO);
