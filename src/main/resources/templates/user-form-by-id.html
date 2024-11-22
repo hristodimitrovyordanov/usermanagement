@@ -6,8 +6,10 @@
 </head>
 <body>
 <h2>Find user by ID</h2>
+<br><br>
 <form th:action="@{/user-management/users/user-by-id}" method="get">
-    <input type="number" name="id" placeholder="Enter User ID"/>
+    <label>Enter User ID:</label>
+    <input type="number" name="id" placeholder="Enter User ID" required/>
     <button type="submit">Find User</button>
 </form>
 

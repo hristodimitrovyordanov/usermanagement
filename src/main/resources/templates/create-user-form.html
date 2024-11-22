@@ -6,16 +6,22 @@
 </head>
 <body>
 <h2>Create User</h2>
+<br><br>
 <form th:action="@{/user-management/users/create}" th:object="${userDTO}" method="post">
-    <input type="text" name="firstName" placeholder="Enter User First Name"/>
+    <label>Enter User First Name:</label>
+    <input type="text" name="firstName" placeholder="Enter User First Name" required/>
     <br><br>
-    <input type="text" name="lastName" placeholder="Enter User Last Name"/>
+    <label>Enter User Last Name:</label>
+    <input type="text" name="lastName" placeholder="Enter User Last Name" required/>
     <br><br>
-    <input type="date" name="dateOfBirth" placeholder="Enter User Date Of Birth"/>
+    <label>Enter User Date Of Birth:</label>
+    <input type="date" name="dateOfBirth" placeholder="Enter User Date Of Birth" required/>
     <br><br>
-    <input type="text" name="phoneNumber" placeholder="Enter User Phone Number"/>
+    <label>Enter User Phone Number:</label>
+    <input type="text" name="phoneNumber" placeholder="Enter User Phone Number" required/>
     <br><br>
-    <input type="email" name="email" placeholder="Enter User Email"/>
+    <label>Enter User Email:</label>
+    <input type="email" name="email" placeholder="Enter User Email" required/>
     <br><br><br>
     <button type="submit">Create User</button>
 </form>

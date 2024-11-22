@@ -177,6 +177,7 @@ public class UserController {
 
     @GetMapping("/users/create-user")
     public String showPostCreateUser() {
+
         return "create-user-form";
     }
 
@@ -184,11 +185,46 @@ public class UserController {
     public String deleteUser(@RequestParam Integer id, Model model) {
         userService.delete(id);
         model.addAttribute("message", "User with ID " + id + " deleted successfully.");
+
         return "delete-confirmation";
     }
 
     @GetMapping("users/delete-user")
     public String showDeleteUser() {
+
         return "user-delete-form";
+    }
+
+    @GetMapping("users/update-user")
+    public String showUpdateUserFormById() {
+
+        return "update-user-by-id-form";
+    }
+
+//    @GetMapping("users/edit-user/{id}")
+    @GetMapping("/users/edit-user")
+    public String showEditUserForm(@RequestParam("id") Integer id, Model model) {
+        UserResponseDTO userResponseDTO = userService.findUserById(id);
+        model.addAttribute("user", userResponseDTO);
+
+        return "edit-user-form";
+    }
+
+    @PutMapping("/users/edit-user/{id}")
+    public String updateUser(
+            @PathVariable("id") Integer id,
+            @ModelAttribute("userDTO") @Valid UserDTO userDTO,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("user", userDTO);
+            return "edit-user-form";
+        }
+
+        UserResponseDTO updatedUser = userService.updateUserById(id, userDTO);
+        model.addAttribute("userResponseDTO", updatedUser);
+
+        return "user-details";
     }
 }

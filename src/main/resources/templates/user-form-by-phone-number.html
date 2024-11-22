@@ -6,8 +6,10 @@
 </head>
 <body>
 <h2>Find user by Phone Number</h2>
+<br><br>
 <form th:action="@{/user-management/users/user-by-phone-number}" method="get">
-    <input type="text" name="phoneNumber" placeholder="Enter User Phone Number"/>
+    <label>Enter User Phone Number:</label>
+    <input type="text" name="phoneNumber" placeholder="Enter User Phone Number" required/>
     <button type="submit">Find User</button>
 </form>
 

@@ -6,8 +6,10 @@
 </head>
 <body>
 <h2>Find all users by last name</h2>
+<br><br>
 <form th:action="@{/user-management/users/user-by-specific-last-name}" method="get">
-    <input type="text" name="lastName" placeholder="Enter User Last Name"/>
+    <label>Enter Users Last Name:</label>
+    <input type="text" name="lastName" placeholder="Enter Users Last Name" required/>
     <button type="submit">Find Users</button>
 </form>
 

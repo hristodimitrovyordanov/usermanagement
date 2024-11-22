@@ -2,12 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Users By Last Name</title>
+    <title>Users By Date Of Birth</title>
 </head>
 <body>
-<h2>Find all users by last name</h2>
+<h2>Find all users by date of birth</h2>
+<br><br>
 <form th:action="@{/user-management/users/user-by-date-of-birth}" method="get">
-    <input type="date" name="dateOfBirth" placeholder="Enter User Date Of Birth"/>
+    <label>Enter Users Date Of Birth:</label>
+    <input type="date" name="dateOfBirth" placeholder="Enter Users Date Of Birth" required/>
     <button type="submit">Find Users</button>
 </form>
 

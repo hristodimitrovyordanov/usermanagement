@@ -6,8 +6,10 @@
 </head>
 <body>
 <h2>Find user by Email</h2>
+<br><br>
 <form th:action="@{/user-management/users/user-by-email}" method="get">
-    <input type="text" name="email" placeholder="Enter User Email"/>
+    <label>Enter User Email:</label>
+    <input type="text" name="email" placeholder="Enter User Email" required/>
     <button type="submit">Find User</button>
 </form>
 
