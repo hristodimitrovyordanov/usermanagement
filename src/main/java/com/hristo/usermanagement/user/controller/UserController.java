@@ -7,6 +7,7 @@ import com.hristo.usermanagement.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -160,6 +161,7 @@ public class UserController {
     }
 
     @PostMapping("users/create")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public String createUser(
             @Valid @ModelAttribute("userDTO") UserDTO userDTO,
             BindingResult bindingResult,
@@ -175,12 +177,14 @@ public class UserController {
         return "user-details";
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     @GetMapping("/users/create-user")
     public String showPostCreateUser() {
 
         return "create-user-form";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/users/delete")
     public String deleteUser(@RequestParam Integer id, Model model) {
         userService.delete(id);
@@ -189,19 +193,21 @@ public class UserController {
         return "delete-confirmation";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("users/delete-user")
     public String showDeleteUser() {
 
         return "user-delete-form";
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     @GetMapping("users/update-user")
     public String showUpdateUserFormById() {
 
         return "update-user-by-id-form";
     }
 
-//    @GetMapping("users/edit-user/{id}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     @GetMapping("/users/edit-user")
     public String showEditUserForm(@RequestParam("id") Integer id, Model model) {
         UserResponseDTO userResponseDTO = userService.findUserById(id);
@@ -210,6 +216,7 @@ public class UserController {
         return "edit-user-form";
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     @PutMapping("/users/edit-user/{id}")
     public String updateUser(
             @PathVariable("id") Integer id,

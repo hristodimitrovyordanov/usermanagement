@@ -27,18 +27,17 @@ public class UserManagementSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(configurer ->
-                configurer
-                        .requestMatchers(HttpMethod.GET, "user-management/users").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.GET, "user-management/home").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.GET, "user-management/users/**").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.POST, "user-management/users").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.PUT, "user-management/users/**").hasRole("MANAGER")
-                        .requestMatchers(HttpMethod.DELETE, "user-management/users/**").hasRole("ADMIN")
-                        .requestMatchers("swagger-ui/index.html/", "/swagger-ui/index.html/**", "/api-docs")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated()
+        http.authorizeHttpRequests(configurer -> configurer
+                .requestMatchers(HttpMethod.GET, "/user-management/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN")
+
+                .requestMatchers(HttpMethod.POST, "/user-management/**").hasAnyRole("MANAGER", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/user-management/**").hasAnyRole("MANAGER", "ADMIN")
+
+                .requestMatchers(HttpMethod.DELETE, "/user-management/**").hasRole("ADMIN")
+
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+
+                .anyRequest().authenticated()
         );
 
         http.httpBasic(Customizer.withDefaults());
