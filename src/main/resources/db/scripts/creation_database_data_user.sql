@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS data_user;
+CREATE DATABASE data_user;
