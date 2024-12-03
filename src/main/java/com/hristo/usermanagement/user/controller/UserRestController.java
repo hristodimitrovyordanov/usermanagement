@@ -28,8 +28,8 @@ public class UserRestController {
     @Operation(summary = "Create user", description = "Return 'userResponseDTO' object, " +
             "which contains only 'firstName', 'lastName' and 'email'")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully created"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     @PostMapping
     public UserResponseDTO createUser(@Valid @RequestBody UserDTO userDTO) {
@@ -38,7 +38,7 @@ public class UserRestController {
 
     @Operation(summary = "Get all users with all data", description = "Return a list of 'UserResponseDTO' from all users")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "200", description = "OK"),
     })
     @GetMapping
     public List<UserResponseDTO> findAllUsers() {
@@ -48,7 +48,7 @@ public class UserRestController {
     @Operation(summary = "Get all users sorted by last name", description = "Return a list of 'UserResponseDTO'" +
             " from all users sorted by last name")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "200", description = "OK"),
     })
     @GetMapping("/sort-by-last-name")
     public List<UserResponseDTO> findAllUsersSortedByLastName() {
@@ -58,7 +58,7 @@ public class UserRestController {
     @Operation(summary = "Get all users sorted by date of birth", description = "Return a list of 'UserResponseDTO'" +
             " from all users sorted by date of birth")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "200", description = "OK"),
     })
     @GetMapping("/sort-by-date-of-birth")
     public List<UserResponseDTO> findAllUsersSortedByDateOfBirth() {
@@ -80,7 +80,7 @@ public class UserRestController {
     @Operation(summary = "Get all users by searched last name", description = "Return a list of 'UserResponseDTO'" +
             " from all users which contains searched last name")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved")
+            @ApiResponse(responseCode = "200", description = "OK")
     })
     @GetMapping("/search-by-last-name/{user-last-name}")
     public List<UserResponseDTO> findAllUsersByLastName(@PathVariable("user-last-name") String lastName) {
@@ -90,7 +90,7 @@ public class UserRestController {
     @Operation(summary = "Get all users by searched first name", description = "Return a list of 'UserResponseDTO'" +
             " from all users which contains searched first name")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved")
+            @ApiResponse(responseCode = "200", description = "OK")
     })
     @GetMapping("/search-by-first-name/{user-first-name}")
     public List<UserResponseDTO> findAllUsersByFirstName(@PathVariable("user-first-name") String firstName) {
@@ -100,7 +100,7 @@ public class UserRestController {
     @Operation(summary = "Get user by phone number", description = "Return a 'UserResponseDTO'" +
             " from a searched user which contains the phone number")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved")
+            @ApiResponse(responseCode = "200", description = "OK")
     })
     @GetMapping("/search-by-phone-number/{user-phone-number}")
     public UserResponseDTO findUserByPhoneNumber(@PathVariable("user-phone-number") String phoneNumber) {
@@ -110,7 +110,7 @@ public class UserRestController {
     @Operation(summary = "Get user by email", description = "Return a 'UserResponseDTO'" +
             " from a searched user which contains the email")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved")
+            @ApiResponse(responseCode = "200", description = "OK")
     })
     @GetMapping("/search-by-email/{user-email}")
     public UserResponseDTO findUserByEmail(@PathVariable("user-email") String email) {
@@ -120,7 +120,7 @@ public class UserRestController {
     @Operation(summary = "Get all users by searched date of birth", description = "Return a list of 'UserResponseDTO'" +
             " from all users which contains searched date of birth")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved")
+            @ApiResponse(responseCode = "200", description = "OK")
     })
     @GetMapping("/search-by-date-of-birth/{user-date-of-birth}")
     public List<UserResponseDTO> findAllUsersByDateOfBirth(@PathVariable("user-date-of-birth") LocalDate dateOfBirth) {
@@ -129,7 +129,9 @@ public class UserRestController {
 
     @Operation(summary = "Update user", description = "Return a 'UserResponseDTO' of updated user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully updated")
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     @PutMapping("/{user-id}")
     public UserResponseDTO updateUserById(@Valid @PathVariable("user-id") Integer id, @RequestBody UserDTO userDTO) {
@@ -139,7 +141,9 @@ public class UserRestController {
     @Operation(summary = "Delete user")
     @DeleteMapping("/{user-id}")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully deleted")
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("user-id") Integer id) {
